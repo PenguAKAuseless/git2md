@@ -151,6 +151,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Prepare repository branch
+        run: |
+          # Принудительно создаём или переключаемся на ветку master
+          git checkout -B master
+
       - name: Publish package to AUR
         uses: KSXGitHub/github-actions-deploy-aur@v2.6.0
         with:
