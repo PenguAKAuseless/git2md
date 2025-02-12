@@ -146,6 +146,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Git in container
+        run: |
+          pacman -Syu --noconfirm git
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -153,7 +157,6 @@ jobs:
 
       - name: Prepare repository branch
         run: |
-          # Принудительно создаём или переключаемся на ветку master
           git checkout -B master
 
       - name: Publish package to AUR
@@ -166,4 +169,3 @@ jobs:
           ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
           ssh_keyscan_types: rsa,ecdsa,ed25519
           force_push: true
-
